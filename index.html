@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Datos Sismológicos</title>
+</head>
+<body>
+  <h1>DATOS SISMOLOGICOS</h1>
+  <input type="text" id="feature-id" placeholder="Introducir ID">
+  <button id="get-feature">Aceptar</button>
+  <div id="feature-data"></div>
+  <script>
+    document.getElementById('get-feature').addEventListener('click', () => {
+      const featureId = document.getElementById('feature-id').value;
+      fetch(`/api/features/${featureId}`)
+        .then(response => response.json())
+        .then(data => {
+          const featureData = document.getElementById('feature-data');
+          featureData.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+        });
+    });
+  </script>
+</body>
+</html>
